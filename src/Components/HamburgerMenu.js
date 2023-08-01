@@ -4,6 +4,7 @@ import { AiOutlineStar } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { toggleHamburgerMenu } from "../store";
 import { useDispatch, useSelector } from "react-redux";
+import Link from "./Link";
 
 function HamburgerMenu() {
     const dispatch = useDispatch();
@@ -26,24 +27,16 @@ function HamburgerMenu() {
                     />
                 </span>
             </div>
-            <div className="hover:bg-blue-100 flex items-center ">
-                <div className="px-6 py-3">
-                    <WiDaySunny size="1.2rem" />
-                </div>
-                <div>My Day</div>
-            </div>
-            <div className="hover:bg-blue-100 flex items-center">
-                <div className="px-6 py-3">
-                    <AiOutlineStar size="1.2rem" />
-                </div>
-                <div>Important</div>
-            </div>
-            <div className="hover:bg-blue-100 flex items-center">
-                <div className="px-6 py-3">
-                    <IoCalendarOutline size="1.2rem" />
-                </div>
-                <div>Planned</div>
-            </div>
+
+            <Link href="/myday" icon="WiDaySunny">
+                My Day
+            </Link>
+            <Link href="/important" icon="AiOutlineStar">
+                Important
+            </Link>
+            <Link href="/planned" icon="IoCalendarOutline">
+                Planned
+            </Link>
         </div>
     );
 }

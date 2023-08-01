@@ -6,11 +6,13 @@ import {
     removeImportantTask,
 } from "./slices/tasksSlice";
 import { hamburgerReducer, toggleHamburgerMenu } from "./slices/hamburgerSlice";
+import { pathReducer, changePath } from "./slices/pathSlice";
 
 const store = configureStore({
     reducer: {
         tasks: tasksReducer,
         hamburgerMenu: hamburgerReducer,
+        path: pathReducer,
     },
 });
 
@@ -20,4 +22,5 @@ export {
     toggleHamburgerMenu,
     addImportantTask,
     removeImportantTask,
+    changePath,
 };
