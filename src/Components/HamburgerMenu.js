@@ -1,7 +1,4 @@
 import { RxHamburgerMenu } from "react-icons/rx";
-import { WiDaySunny } from "react-icons/wi";
-import { AiOutlineStar } from "react-icons/ai";
-import { IoCalendarOutline } from "react-icons/io5";
 import { toggleHamburgerMenu } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "./Link";
@@ -17,15 +14,17 @@ function HamburgerMenu() {
     return (
         <div className="flex flex-col h-full w-72 bg-white py-6">
             <div onClick={handleClick} className="mb-3 pl-6">
-                <span className="hover:bg-mainBgColor">
-                    <RxHamburgerMenu
-                        style={{
-                            height: "1.2rem",
-                            width: "auto",
-                            cursor: "pointer",
-                        }}
-                    />
-                </span>
+                <div className="flex">
+                    <span className="hover:bg-mainBgColor">
+                        <RxHamburgerMenu
+                            style={{
+                                height: "1.2rem",
+                                width: "auto",
+                                cursor: "pointer",
+                            }}
+                        />
+                    </span>
+                </div>
             </div>
 
             <Link href="/myday" icon="WiDaySunny">

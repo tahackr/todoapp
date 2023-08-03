@@ -1,27 +1,32 @@
 import { useState } from "react";
 import { IoCalendarOutline } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../store";
+import { DateCalendar } from "@mui/x-date-pickers";
 
 function AddTaskItem() {
-    const [value, setValue] = useState("");
     const dispatch = useDispatch();
+    const [calendarValue, setCalendarValue] = useState(new Date());
+    const [isCalenderOpen, setIsCalendarOpen] = useState(false);
+    const [value, setValue] = useState("");
+    const path = useSelector((state) => state.path.currentPath);
 
     const handleSubmit = () => {
         if (!value) return;
         dispatch(
             addTask({
                 children: value,
-                important: false,
+                important: path === "/important" ? true : false,
                 done: false,
+                date: calendarValue.getTime(),
                 id: Math.floor(Math.random() * 150),
             })
         );
     };
 
     return (
-        <div className="flex items-center gap-3 px-4 py-2 border-b bg-white rounded justify-between mb-3">
+        <div className="relative flex items-center gap-3 px-4 py-2 border-b bg-white rounded justify-between mb-3">
             <div className="flex items-center gap-4 grow">
                 <span className="h-6 w-6">
                     <AiOutlinePlus
@@ -48,7 +53,10 @@ function AddTaskItem() {
                 />
             </div>
             <div className="flex items-center gap-4">
-                <div className="h-7 w-7 p-1 hover:bg-mainBgColor hover:cursor-pointer">
+                <div
+                    onClick={() => setIsCalendarOpen(!isCalenderOpen)}
+                    className="h-7 w-7 p-1 hover:bg-mainBgColor hover:cursor-pointer"
+                >
                     <IoCalendarOutline
                         style={{ height: "100%", width: "auto" }}
                     />
@@ -65,6 +73,16 @@ function AddTaskItem() {
                         Ekle
                     </button>
                 </div>
+
+                {isCalenderOpen && (
+                    <DateCalendar
+                        sx={{ top: "60px", right: "0" }}
+                        className="absolute bg-white rounded"
+                        value={calendarValue}
+                        onChange={(newValue) => setCalendarValue(newValue)}
+                        disablePast
+                    />
+                )}
             </div>
         </div>
     );

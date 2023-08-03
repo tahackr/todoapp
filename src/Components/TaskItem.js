@@ -22,11 +22,16 @@ function TaskItem({ children, id }) {
     };
 
     useEffect(() => {
-        const array = parentRef.current.className.split(" ").filter((item) => {
-            return !item.includes("-translate-y-full");
-        });
-
-        parentRef.current.className = array.join(" ");
+        // This should have work out without awaiting the promise.
+        // Sometimes it does and sometimes it just does not
+        async function Deneme() {
+            await new Promise((resolve) => setTimeout(resolve, 1));
+            parentRef.current.className = parentRef.current.className.replace(
+                "-translate-y-full",
+                ""
+            );
+        }
+        Deneme();
     }, []);
 
     return (

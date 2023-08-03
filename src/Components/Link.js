@@ -8,19 +8,20 @@ function Link({ href, children, icon }) {
     const currentPath = useSelector((state) => state.path.currentPath);
     const dispatch = useDispatch();
     const handleClick = (e) => {
-        console.log("taha");
         e.preventDefault();
         dispatch(changePath(href));
         window.history.pushState("popstate", "", href);
     };
 
     return (
+        // Use classnames library later for more readable and clean JSX
         <a
             href={href}
             onClick={handleClick}
-            className={`hover:bg-gray-100 flex items-center ${
-                currentPath === href &&
-                "hover:bg-blue-100 bg-blue-100 border-l-4 border-blue-500"
+            className={`flex items-center ${
+                currentPath !== href && "hover:bg-gray-100"
+            } ${
+                currentPath === href && "bg-blue-100 border-l-4 border-blue-500"
             }`}
         >
             <div className={`px-6 py-3 ${currentPath === href && "pl-5"}`}>
