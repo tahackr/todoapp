@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../store";
-
 import AddTaskItemBottomRow from "./AddTaskItemBottomRow";
+import {
+    setIsCalendarOpen,
+    setCalendarValue,
+    setValue,
+    setUserSelectedDate,
+} from "../store";
 
 function AddTaskItem() {
+    const {
+        calendarValue: tempCalendarValue,
+        isCalendarOpen,
+        value,
+    } = useSelector((state) => state.addTaskItem);
+    const calendarValue = new Date(tempCalendarValue);
     const path = useSelector((state) => state.path.currentPath);
-    const [calendarValue, setCalendarValue] = useState(new Date());
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-    const [value, setValue] = useState("");
-    const [userSelectedDate, setUserSelectedDate] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -20,7 +27,7 @@ function AddTaskItem() {
                 !e.target.closest(".MuiDateCalendar-root") &&
                 !e.target.closest(".calendar-button")
             )
-                setIsCalendarOpen(false);
+                dispatch(setIsCalendarOpen(false));
         };
         document.body.addEventListener("click", handler);
         return () => document.body.removeEventListener("click", handler);
@@ -39,8 +46,8 @@ function AddTaskItem() {
             })
         );
 
-        setCalendarValue(new Date());
-        setUserSelectedDate(false);
+        dispatch(setCalendarValue(new Date().getTime()));
+        dispatch(setUserSelectedDate(false));
     };
 
     return (
@@ -62,10 +69,10 @@ function AddTaskItem() {
                         type="text"
                         maxLength={255}
                         value={value}
-                        onChange={(e) => setValue(e.target.value)}
+                        onChange={(e) => dispatch(setValue(e.target.value))}
                         onKeyDown={(e) => {
                             if (e.key === "Enter") {
-                                setValue("");
+                                dispatch(setValue(""));
                                 handleSubmit(value);
                             }
                         }}
@@ -73,17 +80,7 @@ function AddTaskItem() {
                 </div>
             </div>
             <div className="relative flex items-center gap-3 px-4 py-2 bg-mainBgColor rounded-b">
-                <AddTaskItemBottomRow
-                    calendarValue={calendarValue}
-                    setCalendarValue={setCalendarValue}
-                    isCalendarOpen={isCalendarOpen}
-                    setIsCalendarOpen={setIsCalendarOpen}
-                    value={value}
-                    setValue={setValue}
-                    handleSubmit={handleSubmit}
-                    userSelectedDate={userSelectedDate}
-                    setUserSelectedDate={setUserSelectedDate}
-                />
+                <AddTaskItemBottomRow handleSubmit={handleSubmit} />
             </div>
         </div>
     );

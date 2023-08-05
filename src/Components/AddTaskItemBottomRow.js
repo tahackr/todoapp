@@ -1,16 +1,24 @@
 import { IoCalendarOutline } from "react-icons/io5";
 import { DateCalendar } from "@mui/x-date-pickers";
-function AddTaskItemBottomRow({
-    calendarValue,
-    setCalendarValue,
-    isCalendarOpen,
+import { useDispatch, useSelector } from "react-redux";
+import {
     setIsCalendarOpen,
-    value,
+    setCalendarValue,
     setValue,
-    handleSubmit,
-    userSelectedDate,
     setUserSelectedDate,
-}) {
+} from "../store";
+
+function AddTaskItemBottomRow({ handleSubmit }) {
+    const {
+        calendarValue: tempCalendarValue,
+        isCalendarOpen,
+        value,
+        userSelectedDate,
+    } = useSelector((state) => state.addTaskItem);
+    const calendarValue = new Date(tempCalendarValue);
+    const dispatch = useDispatch();
+
+    // Date rendering logic is there a better way???
     const realTime = new Date();
     const userSelectedToday =
         realTime.getDate() === calendarValue.getDate() &&
@@ -20,10 +28,8 @@ function AddTaskItemBottomRow({
         realTime.getDate() + 1 === calendarValue.getDate() &&
         realTime.getMonth() === calendarValue.getMonth() &&
         realTime.getFullYear() === calendarValue.getFullYear();
-
     const isDateThisYear =
         new Date().getFullYear() === calendarValue.getFullYear();
-
     const options = {
         day: "numeric",
         month: "long",
@@ -34,10 +40,16 @@ function AddTaskItemBottomRow({
         calendarValue
     );
 
+    /*     const handleResetDate = () => {
+        dispatch(setUserSelectedDate(false));
+        dispatch(setCalendarValue(new Date().getTime()));
+    }; */
+
     return (
         <div className="flex justify-between grow">
             {userSelectedDate ? (
-                <div className="bg-white border rounded px-2 py-1 text-sm hover:bg-zinc-50 cursor-pointer">
+                <div className="flex items-center gap-1.5 bg-white border rounded px-2 py-1 text-sm hover:bg-zinc-50 cursor-pointer">
+                    <IoCalendarOutline />
                     {(userSelectedToday && "Today") ||
                         (userSelectedTomorrow && "Tomorrow") ||
                         `Last day: ${dateString}`}
@@ -47,7 +59,7 @@ function AddTaskItemBottomRow({
             )}
             <div className="flex items-center gap-4">
                 <div
-                    onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+                    onClick={() => dispatch(setIsCalendarOpen(!isCalendarOpen))}
                     className="calendar-button h-7 w-7 p-1 hover:bg-mainBgColor hover:cursor-pointer"
                 >
                     <IoCalendarOutline
@@ -57,7 +69,7 @@ function AddTaskItemBottomRow({
                 <div>
                     <button
                         onClick={() => {
-                            setValue("");
+                            dispatch(setValue(""));
                             handleSubmit(value);
                         }}
                         disabled={!value}
@@ -73,10 +85,10 @@ function AddTaskItemBottomRow({
                         className="absolute bg-white rounded"
                         value={calendarValue}
                         onChange={(newValue, state) => {
-                            setCalendarValue(newValue);
+                            dispatch(setCalendarValue(newValue.getTime()));
                             if (state === "finish") {
-                                setIsCalendarOpen(false);
-                                setUserSelectedDate(true);
+                                dispatch(setIsCalendarOpen(false));
+                                dispatch(setUserSelectedDate(true));
                             }
                         }}
                         disablePast
