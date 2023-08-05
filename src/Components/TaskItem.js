@@ -37,7 +37,7 @@ function TaskItem({ children, id }) {
     return (
         <div
             ref={parentRef}
-            className="flex items-center gap-3 px-4 py-2 border-b bg-white rounded justify-between mb-3 transition-transform -translate-y-full"
+            className="flex items-center gap-3 px-4 py-2 border-b bg-white rounded justify-between mb-3 transition-transform shadow -translate-y-full"
         >
             <div className="flex items-center gap-4 grow">
                 <button

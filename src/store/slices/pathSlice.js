@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const pathSlice = createSlice({
     name: "path",
-    initialState: { currentPath: "" },
+    initialState: { currentPath: window.location.pathname },
     reducers: {
         changePath(state, action) {
             state.currentPath = action.payload;

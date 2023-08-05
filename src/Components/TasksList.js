@@ -6,7 +6,6 @@ function TasksList({ type }) {
     const tasks = useSelector((state) => state.tasks);
 
     const filteredTasks = tasks.filter((task) => task.important);
-    console.log(filteredTasks);
 
     const renderedImportantTasks = filteredTasks.map((task, i) => (
         <TaskItem id={task.id} key={i}>

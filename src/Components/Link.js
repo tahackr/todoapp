@@ -10,7 +10,8 @@ function Link({ href, children, icon }) {
     const handleClick = (e) => {
         e.preventDefault();
         dispatch(changePath(href));
-        window.history.pushState("popstate", "", href);
+
+        if (href !== currentPath) window.history.pushState({}, "", href);
     };
 
     return (
