@@ -15,6 +15,7 @@ function AddTaskItem() {
         calendarValue: tempCalendarValue,
         isCalendarOpen,
         value,
+        userSelectedDate,
     } = useSelector((state) => state.addTaskItem);
     const calendarValue = new Date(tempCalendarValue);
     const path = useSelector((state) => state.path.currentPath);
@@ -35,16 +36,18 @@ function AddTaskItem() {
 
     const handleSubmit = () => {
         if (!value) return;
+        const newTask = {
+            children: value,
+            important: path === "/important" ? true : false,
+            done: false,
+            date: calendarValue.getTime(),
+            dateSelected: userSelectedDate,
+            createdAt: path,
+            id: Math.floor(Math.random() * 999999),
+        };
+        if (path === "/planned") newTask.dateSelected = true;
 
-        dispatch(
-            addTask({
-                children: value,
-                important: path === "/important" ? true : false,
-                done: false,
-                date: calendarValue.getTime(),
-                id: Math.floor(Math.random() * 999999),
-            })
-        );
+        dispatch(addTask(newTask));
 
         dispatch(setCalendarValue(new Date().getTime()));
         dispatch(setUserSelectedDate(false));

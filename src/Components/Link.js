@@ -2,7 +2,7 @@ import { AiOutlineStar } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { WiDaySunny } from "react-icons/wi";
 import { useDispatch, useSelector } from "react-redux";
-import { changePath } from "../store";
+import { changePath, setCalendarValue, setUserSelectedDate } from "../store";
 
 function Link({ href, children, icon }) {
     const currentPath = useSelector((state) => state.path.currentPath);
@@ -10,6 +10,8 @@ function Link({ href, children, icon }) {
     const handleClick = (e) => {
         e.preventDefault();
         dispatch(changePath(href));
+        dispatch(setUserSelectedDate(false));
+        dispatch(setCalendarValue(new Date().getTime()));
 
         if (href !== currentPath) window.history.pushState({}, "", href);
     };
@@ -22,7 +24,7 @@ function Link({ href, children, icon }) {
             className={`flex items-center ${
                 currentPath !== href && "hover:bg-gray-100"
             } ${
-                currentPath === href && "bg-blue-100 border-l-4 border-blue-500"
+                currentPath === href && "bg-blue-50 border-l-4 border-blue-500"
             }`}
         >
             <div className={`px-6 py-3 ${currentPath === href && "pl-5"}`}>

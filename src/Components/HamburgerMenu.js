@@ -5,7 +5,9 @@ import Link from "./Link";
 
 function HamburgerMenu() {
     const dispatch = useDispatch();
-    const isHamburgerOpen = useSelector((state) => state.hamburgerMenu.isOpen);
+    const isHamburgerOpen = useSelector(
+        (state) => state.config.isHamburgerOpen
+    );
 
     const handleClick = () => {
         dispatch(toggleHamburgerMenu(!isHamburgerOpen));

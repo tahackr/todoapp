@@ -7,6 +7,9 @@ module.exports = {
                 mainBgColor: "#FAF9F8",
                 navColor: "rgb(37,100,207)",
             },
+            colors: {
+                svgColor: "#155bd3",
+            },
         },
     },
     plugins: [],

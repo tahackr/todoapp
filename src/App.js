@@ -1,5 +1,3 @@
-import TasksHeader from "./Components/TasksHeader";
-import TasksList from "./Components/TasksList";
 import NavBar from "./Components/NavBar";
 import HamburgerMenu from "./Components/HamburgerMenu";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,9 +6,12 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useEffect } from "react";
 import { changePath } from "./store";
+import Tasks from "./Components/Tasks";
 
 function App() {
-    const isHamburgerOpen = useSelector((state) => state.hamburgerMenu.isOpen);
+    const isHamburgerOpen = useSelector(
+        (state) => state.config.isHamburgerOpen
+    );
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,19 +33,16 @@ function App() {
                         {isHamburgerOpen && <HamburgerMenu />}
                         <div className="flex flex-col grow">
                             <Route path={"/"}>
-                                <TasksHeader />
-                                <TasksList />
+                                <Tasks />
                             </Route>
                             <Route path="/myday">
-                                <TasksHeader />
-                                <TasksList />
+                                <Tasks />
                             </Route>
                             <Route path="/important">
-                                <TasksHeader type={"important"} />
-                                <TasksList type={"important"} />
+                                <Tasks type={"important"} />
                             </Route>
                             <Route path="/planned">
-                                <div>Planned</div>
+                                <Tasks type={"planned"} />
                             </Route>
                         </div>
                     </div>

@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.due-date::before {
+    content: "\2022";
+    padding: 0 0.4rem;
+}

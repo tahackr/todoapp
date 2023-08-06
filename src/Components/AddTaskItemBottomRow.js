@@ -1,6 +1,7 @@
 import { IoCalendarOutline } from "react-icons/io5";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { useDispatch, useSelector } from "react-redux";
+import useCheckDate from "../hooks/use-checkDate";
 import {
     setIsCalendarOpen,
     setCalendarValue,
@@ -18,18 +19,8 @@ function AddTaskItemBottomRow({ handleSubmit }) {
     const calendarValue = new Date(tempCalendarValue);
     const dispatch = useDispatch();
 
-    // Date rendering logic is there a better way???
-    const realTime = new Date();
-    const userSelectedToday =
-        realTime.getDate() === calendarValue.getDate() &&
-        realTime.getMonth() === calendarValue.getMonth() &&
-        realTime.getFullYear() === calendarValue.getFullYear();
-    const userSelectedTomorrow =
-        realTime.getDate() + 1 === calendarValue.getDate() &&
-        realTime.getMonth() === calendarValue.getMonth() &&
-        realTime.getFullYear() === calendarValue.getFullYear();
-    const isDateThisYear =
-        new Date().getFullYear() === calendarValue.getFullYear();
+    const { userSelectedToday, userSelectedTomorrow, isDateThisYear } =
+        useCheckDate(calendarValue);
     const options = {
         day: "numeric",
         month: "long",

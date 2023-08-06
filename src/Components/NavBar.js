@@ -1,7 +1,15 @@
 import { GoSearch } from "react-icons/go";
 import { TfiAgenda } from "react-icons/tfi";
+import { useDispatch, useSelector } from "react-redux";
+import { changeValue } from "../store";
 
 function NavBar() {
+    const value = useSelector((state) => state.config.value);
+    const dispatch = useDispatch();
+    const handleChange = (e) => {
+        dispatch(changeValue(e.target.value));
+    };
+
     return (
         <div className="flex flex-row bg-navColor px-4 py-2 items-center gap-6">
             <div>
@@ -20,7 +28,11 @@ function NavBar() {
                         <div>
                             <GoSearch style={{ margin: "0 8px" }} />
                         </div>
-                        <input className="rounded p-1.5 outline-none flex-1 text-sm" />
+                        <input
+                            value={value}
+                            onChange={handleChange}
+                            className="rounded p-1.5 outline-none flex-1 text-sm"
+                        />
                     </div>
                     <div className="text-white font-semibold">User</div>
                 </div>

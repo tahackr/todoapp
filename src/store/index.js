@@ -4,8 +4,13 @@ import {
     tasksReducer,
     addImportantTask,
     removeImportantTask,
+    removeTask,
 } from "./slices/tasksSlice";
-import { hamburgerReducer, toggleHamburgerMenu } from "./slices/hamburgerSlice";
+import {
+    configReducer,
+    toggleHamburgerMenu,
+    changeValue,
+} from "./slices/configurationSlice";
 import { pathReducer, changePath } from "./slices/pathSlice";
 import {
     setCalendarValue,
@@ -18,7 +23,7 @@ import {
 const store = configureStore({
     reducer: {
         tasks: tasksReducer,
-        hamburgerMenu: hamburgerReducer,
+        config: configReducer,
         path: pathReducer,
         addTaskItem: addTaskItemReducer,
     },
@@ -35,4 +40,6 @@ export {
     setIsCalendarOpen,
     setValue,
     setUserSelectedDate,
+    removeTask,
+    changeValue,
 };
