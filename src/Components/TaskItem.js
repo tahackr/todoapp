@@ -5,16 +5,16 @@ import { BsTrash } from "react-icons/bs";
 import { MdDone } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addImportantTask, removeImportantTask } from "../store";
+import { addImportantTask, removeImportantTask, completeTask } from "../store";
 import useCheckDate from "../hooks/use-checkDate";
 import ControlDelete from "./ControlDelete";
+import sound from "../ding.mp3";
 
-function TaskItem({ children, id, task }) {
+function TaskItem({ children, id, task, done }) {
     const state = useSelector((state) => state.tasks);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [thisItem] = state.filter((item) => item.id === id);
     const dispatch = useDispatch();
-    const [done, setDone] = useState(false);
     const parentRef = useRef();
 
     const { userSelectedToday, userSelectedTomorrow } = useCheckDate(
@@ -51,7 +51,7 @@ function TaskItem({ children, id, task }) {
             );
         }
         Deneme();
-    }, []);
+    });
 
     return (
         <div
@@ -65,7 +65,10 @@ function TaskItem({ children, id, task }) {
                 <button
                     className="h-6 w-6"
                     type="button"
-                    onClick={() => setDone(!done)}
+                    onClick={() => {
+                        !done && new Audio(sound).play();
+                        dispatch(completeTask(task));
+                    }}
                 >
                     <span className="relative">
                         {done ? (
@@ -102,7 +105,9 @@ function TaskItem({ children, id, task }) {
                     </span>
                 </button>
                 <div className="h-10 flex flex-col justify-center text-sm">
-                    <span>{children}</span>
+                    <span className={`${task.done && "line-through"}`}>
+                        {children}
+                    </span>
                     <div className="flex items-center text-xs">
                         <span>Tasks</span>
                         <>

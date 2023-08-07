@@ -21,8 +21,6 @@ function AddTaskItem() {
     const path = useSelector((state) => state.path.currentPath);
     const dispatch = useDispatch();
 
-    console.log(calendarValue.getTime());
-
     useEffect(() => {
         const handler = (e) => {
             if (

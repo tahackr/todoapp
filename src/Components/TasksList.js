@@ -1,12 +1,14 @@
 import AddTaskItem from "./AddTaskItem";
 import TaskItem from "./TaskItem";
 import { useDispatch, useSelector } from "react-redux";
-import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
+import { AiOutlineDown, AiOutlineUp, AiOutlineRight } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import { changeSortType, changeSortOrder } from "../store";
+import { useState } from "react";
 
 function TasksList({ type, searching }) {
     const tasks = useSelector((state) => state.tasks);
+    const [showCompletedTasks, setShowCompletedTasks] = useState(true);
     const { value, sortType, isSortDescending } = useSelector(
         (state) => state.config
     );
@@ -111,6 +113,19 @@ function TasksList({ type, searching }) {
     }
 
     filteredTasks = sortArray(filteredTasks, sortType);
+    const completedTasks = filteredTasks.filter((task) => task.done);
+
+    if (completedTasks.length) {
+        completedTasks.forEach((task) => {
+            const index = filteredTasks.indexOf(task);
+            filteredTasks.splice(index, 1);
+        });
+    }
+    const renderedCompletedTasks = completedTasks.map((task, i) => (
+        <TaskItem task={task} id={task.id} key={i + 10} done>
+            {task.children}
+        </TaskItem>
+    ));
 
     renderedTasks = filteredTasks.map((task, i) => (
         <TaskItem task={task} id={task.id} key={i}>
@@ -129,7 +144,7 @@ function TasksList({ type, searching }) {
                             }
                             className="p-1 hover:bg-white cursor-pointer"
                         >
-                            <AiOutlineArrowDown />
+                            <AiOutlineDown />
                         </span>
                     ) : (
                         <span
@@ -138,7 +153,7 @@ function TasksList({ type, searching }) {
                             }
                             className="p-1 hover:bg-white cursor-pointer"
                         >
-                            <AiOutlineArrowUp />
+                            <AiOutlineUp />
                         </span>
                     )}
                     <span>Sorted by {sortType}</span>
@@ -155,6 +170,33 @@ function TasksList({ type, searching }) {
             )}
             <AddTaskItem />
             {isSortDescending ? renderedTasks.reverse() : renderedTasks}
+            {!!completedTasks.length && (
+                <>
+                    <div className="pb-6 border-b-4 flex items-center">
+                        {showCompletedTasks ? (
+                            <span
+                                onClick={() =>
+                                    setShowCompletedTasks(!showCompletedTasks)
+                                }
+                                className="p-1 mr-2 hover:bg-white cursor-pointer"
+                            >
+                                <AiOutlineDown />
+                            </span>
+                        ) : (
+                            <span
+                                onClick={() =>
+                                    setShowCompletedTasks(!showCompletedTasks)
+                                }
+                                className="p-1 mr-2 hover:bg-white cursor-pointer"
+                            >
+                                <AiOutlineRight />
+                            </span>
+                        )}
+                        <span className="py-2 font-medium">Completed</span>
+                    </div>
+                </>
+            )}
+            {showCompletedTasks && renderedCompletedTasks}
         </div>
     );
 }

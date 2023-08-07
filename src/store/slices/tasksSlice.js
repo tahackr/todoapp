@@ -22,9 +22,27 @@ const tasksSlice = createSlice({
             const [item] = state.filter((item) => item.id === action.payload);
             item.important = false;
         },
+        completeTask(state, action) {
+            const [taskToDelete] = state.filter(
+                (task) => task.id === action.payload.id
+            );
+            const index = state.indexOf(taskToDelete);
+            state.splice(index, 1, action.payload);
+            const task = state.at(index);
+            if (task.done) {
+                task.done = false;
+            } else {
+                task.done = true;
+            }
+        },
     },
 });
 
-export const { addTask, addImportantTask, removeImportantTask, removeTask } =
-    tasksSlice.actions;
+export const {
+    addTask,
+    addImportantTask,
+    removeImportantTask,
+    removeTask,
+    completeTask,
+} = tasksSlice.actions;
 export const tasksReducer = tasksSlice.reducer;

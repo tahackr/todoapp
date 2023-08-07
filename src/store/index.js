@@ -5,6 +5,7 @@ import {
     addImportantTask,
     removeImportantTask,
     removeTask,
+    completeTask,
 } from "./slices/tasksSlice";
 import {
     configReducer,
@@ -46,4 +47,5 @@ export {
     changeValue,
     changeSortType,
     changeSortOrder,
+    completeTask,
 };
