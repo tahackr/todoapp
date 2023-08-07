@@ -22,10 +22,10 @@ function ControlDelete({ task, setIsModalOpen }) {
     return ReactDOM.createPortal(
         <div
             ref={backgroundRef}
-            className="fixed inset-0 bg-black/30 z-10 text-sm font-medium"
+            className="fixed inset-0 bg-black/30 z-50 text-sm font-medium"
             onClick={handleClose}
         >
-            <div className="absolute flex flex-col justify-between inset-1/2 topz-20 -translate-x-1/2 -translate-y-1/2 bg-white w-72 h-48 p-6 rounded-md shadow-xl">
+            <div className="absolute flex flex-col justify-between inset-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-72 h-48 p-6 rounded-md shadow-xl">
                 <div>{`Are you sure you want to delete "${task.children}"?`}</div>
                 <div className="flex gap-2 self-end">
                     <button

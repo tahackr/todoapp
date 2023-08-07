@@ -104,7 +104,7 @@ function TaskItem({ children, id, task }) {
                 <div className="h-10 flex flex-col justify-center text-sm">
                     <span>{children}</span>
                     <div className="flex items-center text-xs">
-                        <span>Görevler</span>
+                        <span>Tasks</span>
                         <>
                             {task.dateSelected && (
                                 <div className="flex items-center due-date">

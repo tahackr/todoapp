@@ -28,16 +28,23 @@ function HamburgerMenu() {
                     </span>
                 </div>
             </div>
-
-            <Link href="/myday" icon="WiDaySunny">
-                My Day
-            </Link>
-            <Link href="/important" icon="AiOutlineStar">
-                Important
-            </Link>
-            <Link href="/planned" icon="IoCalendarOutline">
-                Planned
-            </Link>
+            <ul>
+                <li>
+                    <Link href="/myday" icon="WiDaySunny">
+                        <span>My Day</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/important" icon="AiOutlineStar">
+                        <span>Important</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/planned" icon="IoCalendarOutline">
+                        <span>Planned</span>
+                    </Link>
+                </li>
+            </ul>
         </div>
     );
 }

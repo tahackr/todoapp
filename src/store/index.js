@@ -10,6 +10,8 @@ import {
     configReducer,
     toggleHamburgerMenu,
     changeValue,
+    changeSortType,
+    changeSortOrder,
 } from "./slices/configurationSlice";
 import { pathReducer, changePath } from "./slices/pathSlice";
 import {
@@ -42,4 +44,6 @@ export {
     setUserSelectedDate,
     removeTask,
     changeValue,
+    changeSortType,
+    changeSortOrder,
 };
