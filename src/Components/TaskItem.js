@@ -66,6 +66,7 @@ function TaskItem({ children, id, task, done }) {
             )}
             <div className="flex items-center gap-4 grow">
                 <button
+                    aria-label="Complete a task"
                     className="h-6 w-6"
                     type="button"
                     onClick={() => {

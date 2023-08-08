@@ -70,6 +70,7 @@ function AddTaskItem() {
                         className="outline-none rounded-md h-10 grow"
                         placeholder="Add Task"
                         type="text"
+                        aria-label="Add a task"
                         maxLength={255}
                         value={value}
                         onChange={(e) => dispatch(setValue(e.target.value))}

@@ -29,6 +29,7 @@ function NavBar() {
                             <GoSearch style={{ margin: "0 8px" }} />
                         </div>
                         <input
+                            aria-label="Enter search"
                             value={value}
                             onChange={handleChange}
                             className="rounded p-1.5 outline-none flex-1 text-sm"

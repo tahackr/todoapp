@@ -132,7 +132,7 @@ function TasksList({ type, searching }) {
     ));
 
     return (
-        <div className="py-6 px-4 overflow-y-auto h-full">
+        <main className="py-6 px-4 overflow-y-auto h-full">
             {sortType && (
                 <div className="flex items-center justify-end text-sm font-medium py-2 px-4 gap-1">
                     {isSortDescending ? (
@@ -195,7 +195,7 @@ function TasksList({ type, searching }) {
                 </>
             )}
             {showCompletedTasks && renderedCompletedTasks}
-        </div>
+        </main>
     );
 }
 
