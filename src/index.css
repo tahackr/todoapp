@@ -6,3 +6,36 @@
     content: "\2022";
     padding: 0 0.4rem;
 }
+
+.date-calendar {
+    top: 3.75rem;
+    right: 0;
+}
+
+@media (max-width: 650px) {
+    .search-bar {
+        max-width: fit-content;
+    }
+
+    .menu-link-icon {
+        padding: 1rem 0.5rem 1rem 1.5rem;
+    }
+
+    .menu {
+        position: absolute;
+        width: 15rem;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 14px;
+    }
+    .menu {
+        position: absolute;
+        width: 11rem;
+    }
+    .nav-icon {
+        display: none;
+    }
+}

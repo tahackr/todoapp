@@ -72,8 +72,7 @@ function AddTaskItemBottomRow({ handleSubmit }) {
 
                 {isCalendarOpen && (
                     <DateCalendar
-                        sx={{ top: "60px", right: "0" }}
-                        className="absolute bg-white rounded"
+                        className="date-calendar absolute bg-white rounded z-10"
                         value={calendarValue}
                         onChange={(newValue, state) => {
                             dispatch(setCalendarValue(newValue.getTime()));

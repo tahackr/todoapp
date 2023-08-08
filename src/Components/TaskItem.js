@@ -43,20 +43,23 @@ function TaskItem({ children, id, task, done }) {
     useEffect(() => {
         // This should have worked out without awaiting the promise.
         // Sometimes it does and sometimes it just does not
-        async function Deneme() {
+        (async function () {
             await new Promise((resolve) => setTimeout(resolve, 1));
-            parentRef.current.className = parentRef.current.className.replace(
-                "-translate-y-full",
-                ""
-            );
-        }
-        Deneme();
+            // Avoid getting errors with optional chaining
+            if (parentRef.current?.className) {
+                parentRef.current.className =
+                    parentRef.current.className.replace(
+                        "-translate-y-full",
+                        ""
+                    );
+            }
+        })();
     });
 
     return (
         <div
             ref={parentRef}
-            className="flex items-center gap-3 px-4 py-2 border-b bg-white rounded justify-between mb-3 transition-transform shadow -translate-y-full"
+            className="task flex items-center gap-3 px-4 py-2 border-b bg-white rounded justify-between mb-3 transition-transform shadow -translate-y-full"
         >
             {isModalOpen && (
                 <ControlDelete task={task} setIsModalOpen={setIsModalOpen} />
@@ -104,8 +107,12 @@ function TaskItem({ children, id, task, done }) {
                         )}
                     </span>
                 </button>
-                <div className="h-10 flex flex-col justify-center text-sm">
-                    <span className={`${task.done && "line-through"}`}>
+                <div className="flex flex-col justify-center text-sm">
+                    <span
+                        className={`flex flex-wrap break-all break-words mb-1${
+                            task.done ? "line-through" : ""
+                        }`}
+                    >
                         {children}
                     </span>
                     <div className="flex items-center text-xs">
@@ -116,7 +123,9 @@ function TaskItem({ children, id, task, done }) {
                                     {miniCalendar}
                                     <div
                                         className={`ml-0.5 ${
-                                            userSelectedToday && "text-svgColor"
+                                            userSelectedToday
+                                                ? "text-svgColor"
+                                                : ""
                                         }`}
                                     >
                                         {userSelectedToday && "Today"}

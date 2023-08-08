@@ -38,7 +38,7 @@ function TasksHeader({ type }) {
 
     return (
         <div className="flex p-6 justify-between">
-            <div className="flex gap-2">
+            <header className="flex gap-2">
                 {isHamburgerOpen ? (
                     <div className="self-start">
                         {!type && <WiDaySunny size="1.2rem" />}
@@ -66,7 +66,7 @@ function TasksHeader({ type }) {
                         <div className="font-light text-sm">{currentDay}</div>
                     )}
                 </div>
-            </div>
+            </header>
             <div
                 onClick={() => setSortOpen(!sortOpen)}
                 className="relative self-center flex gap-1 items-center sort-dropdown cursor-pointer"

@@ -22,12 +22,18 @@ function Link({ href, children, icon }) {
             href={href}
             onClick={handleClick}
             className={`flex items-center ${
-                currentPath !== href && "hover:bg-gray-100"
+                currentPath !== href ? "hover:bg-gray-100" : ""
             } ${
-                currentPath === href && "bg-blue-50 border-l-4 border-blue-500"
+                currentPath === href
+                    ? "bg-blue-50 border-l-4 border-blue-500"
+                    : ""
             }`}
         >
-            <div className={`px-6 py-3 ${currentPath === href && "pl-5"}`}>
+            <div
+                className={`menu-link-icon px-6 py-3 ${
+                    currentPath === href && "pl-5"
+                }`}
+            >
                 {icon === "WiDaySunny" && <WiDaySunny size="1.2rem" />}
                 {icon === "AiOutlineStar" && <AiOutlineStar size="1.2rem" />}
                 {icon === "IoCalendarOutline" && (

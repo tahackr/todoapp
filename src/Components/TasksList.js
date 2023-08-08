@@ -74,8 +74,6 @@ function TasksList({ type, searching }) {
                 {task.children}
             </TaskItem>
         ));
-
-        console.log(filteredTasks);
     }
 
     if (type === "planned") {

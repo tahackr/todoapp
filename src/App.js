@@ -27,9 +27,9 @@ function App() {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <>
-                <div className="flex flex-col h-screen bg-mainBgColor overflow-hidden">
+                <div className="fixed inset-0 flex flex-col bg-mainBgColor overflow-hidden">
                     <NavBar />
-                    <div className="flex h-full">
+                    <div className="flex h-full overflow-y-hidden">
                         {isHamburgerOpen && <HamburgerMenu />}
                         <div className="flex flex-col grow">
                             <Route path={"/"}>
