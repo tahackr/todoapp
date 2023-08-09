@@ -2,6 +2,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { toggleHamburgerMenu } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "./Link";
+import { useEffect } from "react";
 
 function HamburgerMenu() {
     const dispatch = useDispatch();
@@ -12,6 +13,20 @@ function HamburgerMenu() {
     const handleClick = () => {
         dispatch(toggleHamburgerMenu(!isHamburgerOpen));
     };
+
+    useEffect(() => {
+        const handler = (e) => {
+            if (
+                window.innerWidth <= 650 &&
+                !e.target.closest(".menu") &&
+                !e.target.closest(".menu-closed")
+            ) {
+                dispatch(toggleHamburgerMenu(false));
+            }
+        };
+        document.body.addEventListener("click", handler, true);
+        return () => document.body.removeEventListener("click", handler, true);
+    });
 
     return (
         <div className="menu flex flex-col h-full w-72 bg-white py-6 shadow-md z-40">

@@ -50,7 +50,7 @@ function TasksHeader({ type }) {
                 ) : (
                     <div
                         onClick={handleToggleHamburger}
-                        className="hover:bg-white self-start cursor-pointer"
+                        className="hover:bg-white self-start menu-closed cursor-pointer"
                     >
                         <RxHamburgerMenu size={"1.2rem"} />
                     </div>
