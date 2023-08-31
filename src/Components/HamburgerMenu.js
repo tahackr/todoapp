@@ -29,7 +29,7 @@ function HamburgerMenu() {
     });
 
     return (
-        <div className="menu flex flex-col h-full w-72 bg-white py-6 shadow-md z-40">
+        <div className="menu max-[650px]:w-60 max-[650px]:absolute max-[450px]:w-44 flex flex-col h-full w-72 bg-white py-6 shadow-md z-40">
             <div onClick={handleClick} className="mb-3 pl-6">
                 <div className="flex">
                     <span className="hover:bg-mainBgColor">

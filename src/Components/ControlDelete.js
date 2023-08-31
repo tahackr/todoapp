@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import { useRef } from "react";
 import { removeTask } from "../store";
 import { useDispatch } from "react-redux";
@@ -19,7 +19,7 @@ function ControlDelete({ task, setIsModalOpen }) {
         setIsModalOpen(false);
     };
 
-    return ReactDOM.createPortal(
+    return createPortal(
         <div
             ref={backgroundRef}
             className="fixed inset-0 bg-black/30 z-50 text-sm font-medium"

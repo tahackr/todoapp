@@ -10,17 +10,19 @@ import {
 } from "../store";
 
 function AddTaskItemBottomRow({ handleSubmit }) {
+    const dispatch = useDispatch();
     const {
         calendarValue: tempCalendarValue,
         isCalendarOpen,
         value,
         userSelectedDate,
     } = useSelector((state) => state.addTaskItem);
+
     const calendarValue = new Date(tempCalendarValue);
-    const dispatch = useDispatch();
 
     const { userSelectedToday, userSelectedTomorrow, isDateThisYear } =
         useCheckDate(calendarValue);
+
     const options = {
         day: "numeric",
         month: "long",
@@ -31,22 +33,27 @@ function AddTaskItemBottomRow({ handleSubmit }) {
         calendarValue
     );
 
-    /*     const handleResetDate = () => {
+    const handleResetDate = () => {
         dispatch(setUserSelectedDate(false));
         dispatch(setCalendarValue(new Date().getTime()));
-    }; */
+    };
 
     return (
-        <div className="flex justify-between grow">
-            {userSelectedDate ? (
-                <div className="flex items-center gap-1.5 bg-white border rounded px-2 py-1 text-sm hover:bg-zinc-50 cursor-pointer">
+        <div
+            className={`flex grow ${
+                userSelectedDate ? "justify-between" : "justify-end"
+            }`}
+        >
+            {userSelectedDate && (
+                <div
+                    className="flex items-center gap-1.5 bg-white border rounded px-2 py-1 text-sm hover:bg-zinc-50 cursor-pointer"
+                    onClick={handleResetDate}
+                >
                     <IoCalendarOutline />
                     {(userSelectedToday && "Today") ||
                         (userSelectedTomorrow && "Tomorrow") ||
                         `Last day: ${dateString}`}
                 </div>
-            ) : (
-                <div></div>
             )}
             <div className="flex items-center gap-4">
                 <div
@@ -72,7 +79,7 @@ function AddTaskItemBottomRow({ handleSubmit }) {
 
                 {isCalendarOpen && (
                     <DateCalendar
-                        className="date-calendar absolute bg-white rounded z-10"
+                        className="top-14 right-0 absolute bg-white rounded z-10"
                         value={calendarValue}
                         onChange={(newValue, state) => {
                             dispatch(setCalendarValue(newValue.getTime()));

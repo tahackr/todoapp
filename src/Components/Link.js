@@ -30,7 +30,7 @@ function Link({ href, children, icon }) {
             }`}
         >
             <div
-                className={`menu-link-icon px-6 py-3 ${
+                className={`max-[650px]:py-4 max-[650px]:pr-2 max-[650px]:pl-6 px-6 py-3 ${
                     currentPath === href && "pl-5"
                 }`}
             >

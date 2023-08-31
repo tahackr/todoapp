@@ -9,6 +9,7 @@ import {
     setValue,
     setUserSelectedDate,
 } from "../store";
+import { v4 as uuidv4 } from "uuid";
 
 function AddTaskItem() {
     const {
@@ -18,7 +19,6 @@ function AddTaskItem() {
         userSelectedDate,
     } = useSelector((state) => state.addTaskItem);
     const calendarValue = new Date(tempCalendarValue);
-    const path = useSelector((state) => state.path.currentPath);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -38,14 +38,16 @@ function AddTaskItem() {
         if (!value) return;
         const newTask = {
             children: value,
-            important: path === "/important" ? true : false,
+            important: window.location.pathname === "/important" ? true : false,
             done: false,
             date: calendarValue.getTime(),
-            dateSelected: userSelectedDate,
-            createdAt: path,
-            id: Math.floor(Math.random() * 999999),
+            dateSelected:
+                window.location.pathname === "/planned"
+                    ? true
+                    : userSelectedDate,
+            createdAt: window.location.pathname,
+            id: uuidv4(),
         };
-        if (path === "/planned") newTask.dateSelected = true;
 
         dispatch(addTask(newTask));
 
@@ -57,7 +59,7 @@ function AddTaskItem() {
         <div className="mb-3 shadow rounded">
             <div className="flex items-center gap-3 px-4 py-2 border-b bg-white justify-between rounded-t">
                 <div className="flex items-center gap-4 grow">
-                    <span className="h-6 w-6">
+                    <label htmlFor="task-input" className="h-6 w-6">
                         <AiOutlinePlus
                             style={{
                                 height: "100%",
@@ -65,8 +67,9 @@ function AddTaskItem() {
                                 color: "rgb(37 100 207)",
                             }}
                         />
-                    </span>
+                    </label>
                     <input
+                        id="task-input"
                         className="outline-none rounded-md h-10 grow"
                         placeholder="Add Task"
                         type="text"

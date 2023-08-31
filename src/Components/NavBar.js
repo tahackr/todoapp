@@ -12,7 +12,7 @@ function NavBar() {
 
     return (
         <div className="flex flex-row bg-navColor px-4 py-2 items-center gap-6">
-            <div className="nav-icon">
+            <div className="max-[450px]:hidden">
                 <TfiAgenda size={"22px"} style={{ color: "#dddddd" }} />
             </div>
 
@@ -24,7 +24,7 @@ function NavBar() {
                     >
                         To Do
                     </a>
-                    <div className="search-bar rounded flex bg-white items-center max-w-sm flex-1">
+                    <div className="max-w[650px]:max-w-fit rounded flex bg-white items-center max-w-sm flex-1">
                         <div>
                             <GoSearch style={{ margin: "0 8px" }} />
                         </div>

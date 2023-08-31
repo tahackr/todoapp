@@ -110,7 +110,7 @@ function TaskItem({ children, id, task, done }) {
                 </button>
                 <div className="flex flex-col justify-center text-sm">
                     <span
-                        className={`flex flex-wrap break-all break-words mb-1${
+                        className={`flex flex-wrap break-all break-words mb-1 ${
                             task.done ? "line-through" : ""
                         }`}
                     >
@@ -120,7 +120,7 @@ function TaskItem({ children, id, task, done }) {
                         <span>Tasks</span>
                         <>
                             {task.dateSelected && (
-                                <div className="flex items-center due-date">
+                                <div className="flex items-center before:content-['•'] before:px-2">
                                     {miniCalendar}
                                     <div
                                         className={`ml-0.5 ${
